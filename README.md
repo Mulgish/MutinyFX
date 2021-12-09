@@ -16,9 +16,9 @@ JavaFX bindings for [Mutiny](https://smallrye.io/smallrye-mutiny/)
 
 ```java
 FxMulti.createFrom().observableValue(observableValue);
-        FxMulti.createFrom().observableList(observableList);
-        FxMulti.createFrom().observableSet(observableSet);
-        FxMulti.createFrom().observableMap(observableMap);
+FxMulti.createFrom().observableList(observableList);
+FxMulti.createFrom().observableSet(observableSet);
+FxMulti.createFrom().observableMap(observableMap);
 ```
 
 ### Examples:
