@@ -1,5 +1,6 @@
-package com.mulgish;
+package com.test;
 
+import com.mulgish.FxMulti;
 import io.smallrye.mutiny.subscription.Cancellable;
 import javafx.collections.ListChangeListener;
 import javafx.scene.input.MouseButton;

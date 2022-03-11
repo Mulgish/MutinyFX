@@ -1,19 +1,18 @@
-package com.mulgish;
+package com.test;
 
+import com.mulgish.FxMulti;
 import io.smallrye.mutiny.subscription.Cancellable;
-import javafx.collections.*;
-import javafx.scene.input.MouseButton;
-import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterEach;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
+import javafx.collections.ObservableSet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
-import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ObservableCollectionTest extends ApplicationTest{
 

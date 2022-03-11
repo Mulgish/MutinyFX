@@ -54,11 +54,6 @@
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
         </dependency>
@@ -68,6 +63,12 @@
             <version>${mutiny.version}</version>
         </dependency>
         <!--TESTING-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.testfx</groupId>
             <artifactId>testfx-junit5</artifactId>
@@ -120,7 +121,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.10.0</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -132,10 +133,10 @@
                 <version>${maven.surefire.version}</version>
                 <configuration>
                     <!--suppress UnresolvedMavenProperty -->
-                    <argLine>${mavenArgs}</argLine>
-                    <forkCount>0</forkCount>
                     <argLine>
-                        --add-exports javafx.graphics=ALL-UNNAMED
+                        ${mavenArgs}
+                        --add-exports=javafx.graphics/com.sun.javafx.application=org.testfx
+                        --add-exports=javafx.graphics/com.sun.glass.ui=org.testfx.monocle
                     </argLine>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
