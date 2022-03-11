@@ -111,8 +111,11 @@
                 <version>${maven.surefire.version}</version>
                 <configuration>
                     <!--suppress UnresolvedMavenProperty -->
-                    <argLine>${mavenArgs}</argLine>
-                    <argLine>--add-exports=javafx.graphics/com.sun.javafx.application=org.testfx</argLine>
+                    <argLine>
+                        ${mavenArgs}
+                        --add-exports=javafx.graphics/com.sun.javafx.application=org.testfx
+                        --add-exports=javafx.graphics/com.sun.glass.ui=org.testfx.monocle
+                    </argLine>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
                         <jacoco.test>${mavenArgs}</jacoco.test>
