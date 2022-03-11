@@ -54,11 +54,6 @@
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>${javafx.version}</version>
         </dependency>
@@ -68,6 +63,12 @@
             <version>${mutiny.version}</version>
         </dependency>
         <!--TESTING-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.testfx</groupId>
             <artifactId>testfx-junit5</artifactId>
@@ -110,27 +111,8 @@
                 <version>${maven.surefire.version}</version>
                 <configuration>
                     <!--suppress UnresolvedMavenProperty -->
-                    <argLine>
-                        ${mavenArgs}
-                        --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.scene.text=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.util=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.scene.layout=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.binding=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.geom=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.scene.input=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.scene.traversal=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED
-                        --add-exports javafx.graphics/com.sun.javafx.binding=ALL-UNNAMED
-                        --add-exports javafx.base/com.sun.javafx.binding=ALL-UNNAMED
-                        --add-exports javafx.base/com.sun.javafx.collections=ALL-UNNAMED
-                        --add-exports javafx.base/com.sun.javafx=ALL-UNNAMED
-                        --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED
-                        --add-exports javafx.base/com.sun.javafx.logging=ALL-UNNAMED
-                        --add-reads com.mulgish.mutinyfx=org.reactivestreams
-                    </argLine>
+                    <argLine>${mavenArgs}</argLine>
+                    <argLine>--add-exports=javafx.graphics/com.sun.javafx.application=org.testfx</argLine>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
                         <jacoco.test>${mavenArgs}</jacoco.test>
