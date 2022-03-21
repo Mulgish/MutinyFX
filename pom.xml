@@ -225,6 +225,7 @@
                                 <configuration>
                                     <keyname>0x0481EC7A</keyname>
                                     <passphraseServerId>0x0481EC7A</passphraseServerId>
+                                    <homedir>/opt/tooling/.gnupg</homedir>
                                 </configuration>
                             </execution>
                         </executions>
