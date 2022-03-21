@@ -1,7 +1,54 @@
 <html>
-  <head>
-<meta name="google-site-verification" content="yDYJdz8sEkdeBGOuAh5DQy-p6LzK-tybX3gMaVyoPbc" />
-  </head>
-  <body>
-  </body>
+<head>
+    <meta name="google-site-verification" content="yDYJdz8sEkdeBGOuAh5DQy-p6LzK-tybX3gMaVyoPbc"/>
+</head>
+<body>
+<h1 id="mutinyfx">MutinyFX</h1>
+<p><img src="https://img.shields.io/maven-central/v/com.mulgish/mutinyfx?style=for-the-badge" alt="Maven Central"></p>
+<p><a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a> bindings for JavaFX allows to observe UI component events
+    and react to them.</p>
+<h3 id="binaries-">Binaries:</h3>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.mulgish<span
+            class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mutinyfx<span
+            class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.2<span class="hljs-tag">&lt;/<span
+            class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h3 id="usage-">Usage:</h3>
+<pre><code class="lang-java"><span class="hljs-selector-tag">FxMulti</span><span
+        class="hljs-selector-class">.createFrom</span>()<span class="hljs-selector-class">.observableValue</span>(<span
+        class="hljs-selector-tag">observableValue</span>);
+<span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
+            class="hljs-selector-class">.observableList</span>(<span class="hljs-selector-tag">observableList</span>);
+<span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
+            class="hljs-selector-class">.observableSet</span>(<span class="hljs-selector-tag">observableSet</span>);
+<span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
+            class="hljs-selector-class">.observableMap</span>(<span class="hljs-selector-tag">observableMap</span>);
+</code></pre>
+<h3 id="examples-">Examples:</h3>
+<p>Observing list additions</p>
+<pre><code class="lang-java"> FxMulti.createFrom().observableList(observableList)
+         .filter(ListChangeListener.Change::wasAdded)
+         .subscribe<span class="hljs-function"><span class="hljs-params">()</span>.<span
+            class="hljs-title">with</span><span class="hljs-params">((change) -&gt; {
+             System.out.println(<span class="hljs-string">"Item(s) added: "</span> + change.getAddedSubList());
+         })</span>;</span>
+</code></pre>
+<p>Observing user input every 200ms</p>
+<pre><code class="lang-java"> <span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
+        class="hljs-selector-class">.observableValue</span>(textField)
+         <span class="hljs-selector-class">.group</span>()<span class="hljs-selector-class">.intoMultis</span>()<span
+            class="hljs-selector-class">.every</span>(Duration.ofMillis(<span class="hljs-number">200</span>))
+         <span class="hljs-selector-class">.onItem</span>()<span class="hljs-selector-class">.transformToMulti</span>(items -&gt; items.select().last())<span
+            class="hljs-selector-class">.merge</span>()
+         <span class="hljs-selector-class">.subscribe</span>()<span class="hljs-selector-class">.with</span>((change) -&gt; {
+             <span class="hljs-selector-tag">System</span><span class="hljs-selector-class">.out</span><span
+            class="hljs-selector-class">.println</span>(<span class="hljs-string">"User entered: "</span> + change.getNewValue());
+         });
+</code></pre>
+<p><a href="https://github.com/Mulgish/MutinyFX">Source code</a></p>
+</body>
 </html>
