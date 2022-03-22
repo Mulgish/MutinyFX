@@ -1,59 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="yDYJdz8sEkdeBGOuAh5DQy-p6LzK-tybX3gMaVyoPbc"/>
-    <link rel="alternate" href="https://mulgish.github.io/MutinyFX/" hreflang="en"/>
     <title>MutinyFX - Mutiny Bindings for JavaFX Applications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="yDYJdz8sEkdeBGOuAh5DQy-p6LzK-tybX3gMaVyoPbc"/>
     <meta name="description" content="Observe JavaFX events and react to them with Mutiny library.">
+    <link rel="alternate" href="https://mulgish.github.io/MutinyFX/" hreflang="en"/>
 </head>
 <body>
-<h1 id="mutinyfx">MutinyFX</h1>
-<p><img src="https://img.shields.io/maven-central/v/com.mulgish/mutinyfx?style=for-the-badge" alt="Maven Central"></p>
-<p><a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a> bindings for <a href="https://openjfx.io/">JavaFX</a>
-    allows to observe UI component events
-    and react to them.</p>
-<h3 id="binaries-">Binaries:</h3>
-<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.mulgish<span
-            class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mutinyfx<span
-            class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>0.0.2<span class="hljs-tag">&lt;/<span
-            class="hljs-name">version</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<div id='content'>
+    <h1 id="mutinyfx">MutinyFX</h1>
+    <p><img src="https://img.shields.io/maven-central/v/com.mulgish/mutinyfx?style=for-the-badge" alt="Maven Central"/>
+    </p>
+    <p><a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a> bindings for <a href="https://openjfx.io/">JavaFX</a>
+        allows to observe UI component events
+        and react to them.</a></p>
+    <h3 id="binaries">Binaries:</h3>
+    <pre><code class="xml language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.mulgish&lt;/groupId&gt;
+    &lt;artifactId&gt;mutinyfx&lt;/artifactId&gt;
+    &lt;version&gt;0.0.2&lt;/version&gt;
+&lt;/dependency&gt;
 </code></pre>
-<h3 id="usage-">Usage:</h3>
-<pre><code class="lang-java"><span class="hljs-selector-tag">FxMulti</span><span
-        class="hljs-selector-class">.createFrom</span>()<span class="hljs-selector-class">.observableValue</span>(<span
-        class="hljs-selector-tag">observableValue</span>);
-<span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
-            class="hljs-selector-class">.observableList</span>(<span class="hljs-selector-tag">observableList</span>);
-<span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
-            class="hljs-selector-class">.observableSet</span>(<span class="hljs-selector-tag">observableSet</span>);
-<span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
-            class="hljs-selector-class">.observableMap</span>(<span class="hljs-selector-tag">observableMap</span>);
+    <h3 id="usage">Usage:</h3>
+    <pre><code class="java language-java">FxMulti.createFrom().observableValue(observableValue);
+FxMulti.createFrom().observableList(observableList);
+FxMulti.createFrom().observableSet(observableSet);
+FxMulti.createFrom().observableMap(observableMap);
 </code></pre>
-<h3 id="examples-">Examples:</h3>
-<p>Observing list additions</p>
-<pre><code class="lang-java"> FxMulti.createFrom().observableList(observableList)
+    <h3 id="examples">Examples:</h3>
+    <p>Observing list additions</p>
+    <pre><code class="java language-java"> FxMulti.createFrom().observableList(observableList)
          .filter(ListChangeListener.Change::wasAdded)
-         .subscribe<span class="hljs-function"><span class="hljs-params">()</span>.<span
-            class="hljs-title">with</span><span class="hljs-params">((change) -&gt; {
-             System.out.println(<span class="hljs-string">"Item(s) added: "</span> + change.getAddedSubList());
-         })</span>;</span>
-</code></pre>
-<p>Observing user input every 200ms</p>
-<pre><code class="lang-java"> <span class="hljs-selector-tag">FxMulti</span><span class="hljs-selector-class">.createFrom</span>()<span
-        class="hljs-selector-class">.observableValue</span>(textField)
-         <span class="hljs-selector-class">.group</span>()<span class="hljs-selector-class">.intoMultis</span>()<span
-            class="hljs-selector-class">.every</span>(Duration.ofMillis(<span class="hljs-number">200</span>))
-         <span class="hljs-selector-class">.onItem</span>()<span class="hljs-selector-class">.transformToMulti</span>(items -&gt; items.select().last())<span
-            class="hljs-selector-class">.merge</span>()
-         <span class="hljs-selector-class">.subscribe</span>()<span class="hljs-selector-class">.with</span>((change) -&gt; {
-             <span class="hljs-selector-tag">System</span><span class="hljs-selector-class">.out</span><span
-            class="hljs-selector-class">.println</span>(<span class="hljs-string">"User entered: "</span> + change.getNewValue());
+         .subscribe().with((change) -&gt; {
+             System.out.println("Item(s) added: " + change.getAddedSubList());
          });
 </code></pre>
-<p><a href="https://github.com/Mulgish/MutinyFX">Source code</a></p>
+    <p>Observing user input every 200ms</p>
+    <pre><code class="java language-java"> FxMulti.createFrom().observableValue(textField)
+         .group().intoMultis().every(Duration.ofMillis(200))
+         .onItem().transformToMulti(items -&gt; items.select().last()).merge()
+         .subscribe().with((change) -&gt; {
+             System.out.println("User entered: " + change.getNewValue());
+         });
+</code></pre>
+
+</div>
+<style type='text/css'>body {
+    font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #111;
+    background-color: #fdfdfd;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    -o-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+    padding: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 5px;
+    }
+
+    body > #content {
+        padding: 0px 20px 20px 20px !important;
+    }
+}
+
+body > #content {
+    margin: 0px;
+    max-width: 900px;
+    border: 1px solid #e1e4e8;
+    padding: 10px 40px;
+    padding-bottom: 20px;
+    border-radius: 2px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+hr {
+    color: #bbb;
+    background-color: #bbb;
+    height: 1px;
+    flex: 0 1 auto;
+    margin: 1em 0;
+    padding: 0;
+    border: none;
+}
+
+/**
+ * Links
+ */
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #0366d6;
+}
+
+a:hover {
+    color: #0366d6;
+    text-decoration: underline;
+}
+
+pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+}
+
+/**
+  * Code blocks
+  */
+
+code {
+    background-color: rgba(27, 31, 35, .05);
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    word-wrap: break-word;
+    padding: .2em .4em;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+}
+
+pre > code {
+    background-color: transparent;
+    border: 0;
+    display: inline;
+    line-height: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    word-wrap: normal;
+    font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+blockquote {
+    margin-left: 30px;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    border-left-width: 3px;
+    padding: 0 1em;
+    color: #828282;
+    border-left: 4px solid #e8e8e8;
+    padding-left: 15px;
+    font-size: 18px;
+    letter-spacing: -1px;
+    font-style: italic;
+}
+
+blockquote * {
+    font-style: normal !important;
+    letter-spacing: 0;
+    color: #6a737d !important;
+}
+
+/**
+ * Tables
+ */
+table {
+    border-spacing: 2px;
+    display: block;
+    font-size: 14px;
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 16px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+th {
+    font-weight: 600;
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+/**
+ * Others
+ */
+
+img {
+    max-width: 100%;
+}
+
+p {
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #24292e;
+}
+
+ul {
+    margin-top: 0;
+}
+
+li {
+    color: #24292e;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+li + li {
+    margin-top: 0.25em;
+}
+
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #24292e;
+}
+
+a:visited {
+    color: #0366d6;
+}
+
+h1, h2, h3 {
+    border-bottom: 1px solid #eaecef;
+    color: #111;
+    /* Darker */
+}</style>
 </body>
 </html>
