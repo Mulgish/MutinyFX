@@ -2,7 +2,7 @@
 
 ![Maven Central](https://img.shields.io/maven-central/v/com.mulgish/mutinyfx?style=for-the-badge)
 
-JavaFX bindings for [Mutiny](https://smallrye.io/smallrye-mutiny/)
+[Mutiny](https://smallrye.io/smallrye-mutiny/) bindings for JavaFX
 
 ### Binaries:
 
@@ -10,7 +10,7 @@ JavaFX bindings for [Mutiny](https://smallrye.io/smallrye-mutiny/)
 <dependency>
     <groupId>com.mulgish</groupId>
     <artifactId>mutinyfx</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
@@ -39,9 +39,15 @@ Observing user input every 200ms
 
 ```java
  FxMulti.createFrom().observableValue(textField)
-         .group().intoMultis().every(Duration.ofMillis(200))
-         .onItem().transformToMulti(items -> items.select().last()).merge()
-         .subscribe().with((change) -> {
-             System.out.println("User entered: " + change.getNewValue());
-         });
+        .group().intoMultis().every(Duration.ofMillis(200))
+        .onItem().transformToMulti(items->items.select().last()).merge()
+        .subscribe().with((change)->{
+        System.out.println("User entered: "+change.getNewValue());
+        });
 ```
+
+### Links:
+
+[Home page](https://mulgish.github.io/MutinyFX/)
+
+[Maven index](https://search.maven.org/artifact/com.mulgish/mutinyfx)
