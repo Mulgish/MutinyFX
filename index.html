@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>MutinyFX - Mutiny Bindings for JavaFX Applications</title>
+    <title>MutinyFX - Mutiny Bindings for JavaFX</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="yDYJdz8sEkdeBGOuAh5DQy-p6LzK-tybX3gMaVyoPbc"/>
     <meta name="description" content="Observe JavaFX events and react to them with Mutiny library.">
@@ -12,16 +12,18 @@
     <h1 id="mutinyfx">MutinyFX</h1>
     <p><img src="https://img.shields.io/maven-central/v/com.mulgish/mutinyfx?style=for-the-badge" alt="Maven Central"/>
     </p>
-    <p><a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a> bindings for <a href="https://openjfx.io/">JavaFX</a>
-        allows to observe UI component events
-        and react to them.</a></p>
+    <p>This library offers <a href="https://smallrye.io/smallrye-mutiny/">Mutiny</a> bindings for <a
+            href="https://openjfx.io/">JavaFX.</a></a></p>
+    <p>Source code can be found <a href="https://github.com/Mulgish/MutinyFX">here</a>.</p>
     <h3 id="binaries">Binaries:</h3>
+    <a href="https://search.maven.org/artifact/com.mulgish/mutinyfx">
     <pre><code class="xml language-xml">&lt;dependency&gt;
     &lt;groupId&gt;com.mulgish&lt;/groupId&gt;
     &lt;artifactId&gt;mutinyfx&lt;/artifactId&gt;
     &lt;version&gt;0.0.4&lt;/version&gt;
 &lt;/dependency&gt;
 </code></pre>
+    </a>
     <h3 id="usage">Usage:</h3>
     <pre><code class="java language-java">FxMulti.createFrom().observableValue(observableValue);
 FxMulti.createFrom().observableList(observableList);
