@@ -8,7 +8,6 @@ module com.test {
     requires javafx.controls;
     requires io.smallrye.mutiny;
     requires org.testfx.junit5;
-    requires org.testfx.monocle;
     requires org.testfx;
 
     exports com.test;
