@@ -101,6 +101,12 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.testfx</groupId>
+            <artifactId>openjfx-monocle</artifactId>
+            <version>21.0.2</version> <!-- 17.0.10 For OpenJFX 17, 11.0.2 For OpenJFX 11, jdk-8.0.372 for Java 8 -->
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -121,8 +127,13 @@
                     <!--suppress UnresolvedMavenProperty -->
                     <argLine>
                         ${mavenArgs}
+                        --add-opens=javafx.graphics/com.sun.javafx.application=org.testfx
+                        --add-opens=javafx.graphics/com.sun.glass.ui=org.testfx.monocle
+                        --add-opens=javafx.graphics/com.sun.glass.ui=org.testfx
                         --add-exports=javafx.graphics/com.sun.javafx.application=org.testfx
-                        --add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                        --add-exports=javafx.graphics/com.sun.glass.ui=org.testfx.monocle
+                        --add-exports=javafx.graphics/com.sun.javafx.util=org.testfx.monocle
+                        --add-exports=javafx.base/com.sun.javafx.logging=org.testfx.monocle
                     </argLine>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
